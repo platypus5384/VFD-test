@@ -125,6 +125,29 @@ void enableDigit(uint8_t digit){
 	}
 }
 
+void disableDigit(uint8_t digit){
+	switch(digit){
+	case 0:
+		HAL_GPIO_WritePin(GRID1_GPIO_Port, GRID1_Pin, GPIO_PIN_RESET);
+		break;
+	case 1:
+		HAL_GPIO_WritePin(GRID2_GPIO_Port, GRID2_Pin, GPIO_PIN_RESET);
+		break;
+	case 2:
+		HAL_GPIO_WritePin(GRID3_GPIO_Port, GRID3_Pin, GPIO_PIN_RESET);
+		break;
+	case 3:
+		HAL_GPIO_WritePin(GRID4_GPIO_Port, GRID4_Pin, GPIO_PIN_RESET);
+		break;
+	case 4:
+		HAL_GPIO_WritePin(GRID5_GPIO_Port, GRID5_Pin, GPIO_PIN_RESET);
+		break;
+	case 5:
+		HAL_GPIO_WritePin(GRID6_GPIO_Port, GRID6_Pin, GPIO_PIN_RESET);
+		break;
+	}
+}
+
 void disableAllDigit(){
 	HAL_GPIO_WritePin(GRID1_GPIO_Port, GRID1_Pin, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GRID2_GPIO_Port, GRID2_Pin, GPIO_PIN_RESET);
@@ -175,6 +198,8 @@ int main(void)
 	uint8_t ct = 0;
 	RTC_DateTypeDef gDate;
 	RTC_TimeTypeDef gTime;
+	disableAllDigit();
+#define DIGIT_DELAY 2
 	while (1)
 	{
 		/* USER CODE END WHILE */
@@ -183,33 +208,29 @@ int main(void)
 		HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
 		HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BCD);
 
-		disableAllDigit();
-		enableDigit(0);
+
+		disableDigit(5); enableDigit(0);
 		displayNumber(gTime.Seconds % 10);
-		HAL_Delay(1);
-		disableAllDigit();
-		enableDigit(1);
+		HAL_Delay(DIGIT_DELAY);
+
+		disableDigit(0); enableDigit(1);
 		displayNumber(gTime.Seconds / 10);
-		HAL_Delay(1);
+		HAL_Delay(DIGIT_DELAY);
 
 
-		disableAllDigit();
-		enableDigit(2);
+		disableDigit(1); enableDigit(2);
 		displayNumber(gTime.Minutes % 10);
-		HAL_Delay(1);
-		disableAllDigit();
-		enableDigit(3);
+		HAL_Delay(DIGIT_DELAY);
+		disableDigit(2); enableDigit(3);
 		displayNumber(gTime.Minutes / 10);
-		HAL_Delay(1);
+		HAL_Delay(DIGIT_DELAY);
 
-		disableAllDigit();
-		enableDigit(4);
+		disableDigit(3); enableDigit(4);
 		displayNumber(gTime.Hours % 10);
-		HAL_Delay(1);
-		disableAllDigit();
-		enableDigit(5);
+		HAL_Delay(DIGIT_DELAY);
+		disableDigit(4); enableDigit(5);
 		displayNumber(gTime.Hours / 10);
-		HAL_Delay(1);
+		HAL_Delay(DIGIT_DELAY);
 
 
 		//			printf("Current time is %02d:%02d:%02d\n", gTime.Hours, gTime.Minutes, gTime.Seconds);
