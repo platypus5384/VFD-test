@@ -801,11 +801,11 @@ static void MX_RTC_Init(void)
 		sTime.Hours = 14;
  800064c:	230e      	movs	r3, #14
  800064e:	713b      	strb	r3, [r7, #4]
-		sTime.Minutes = 39;
- 8000650:	2327      	movs	r3, #39	; 0x27
+		sTime.Minutes = 41;
+ 8000650:	2329      	movs	r3, #41	; 0x29
  8000652:	717b      	strb	r3, [r7, #5]
-		sTime.Seconds = 0;
- 8000654:	2300      	movs	r3, #0
+		sTime.Seconds = 40;
+ 8000654:	2328      	movs	r3, #40	; 0x28
  8000656:	71bb      	strb	r3, [r7, #6]
 		if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
  8000658:	1d3b      	adds	r3, r7, #4

@@ -360,8 +360,8 @@ static void MX_RTC_Init(void)
 		RTC_DateTypeDef sDate = {0};
 
 		sTime.Hours = 14;
-		sTime.Minutes = 39;
-		sTime.Seconds = 0;
+		sTime.Minutes = 41;
+		sTime.Seconds = 40;
 		if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
 		{
 			Error_Handler();
